@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>TASK 1 - Serti yoxlama</h2>
+    Yasinizi daxil edin: <input type="text" id="yas">
+    <p>Hansi bilet novunu secirsiz?</p>
+    <input type="radio" id="bilet_vip" name="bilet"><b>VIP Bileti</b>
+    <input type="radio" id="bilet_standart" name="bilet">Standart bilet
+    <p>Biletiniz varmi? <input type="checkbox" id="bilet_var"></p>
+    <p>Sexsiyet vesiqeniz varmi? <input type="checkbox" id="vesiqe_var"></p>
+    <button onclick="check()">Yoxla</button>
+    <span id="res"></span>
+
+
+
+
+    <h2>TASK 2 - Avtomobil Kirayəsi</h2>
+    Yaşınızı daxil edin: <input type="text" id="yas2">
+    <p>Sürücülük vəsiqəniz varmı? <input type="checkbox" id="suruculuk"></p>
+    <p>Lüks avtomobil istəyirsiniz? <input type="checkbox" id="luks"></p>
+    <p>Depozit ödəməyə hazırsınızmı? <input type="checkbox" id="depozit"></p>
+    <button onclick="checkCar()">Yoxla</button>
+    <p id="res2"></p>
+
+
+
+    <h2>TASK 3 - Təhsil və İcarə Seçimi</h2>
+    Yaşınızı daxil edin: <input type="text" id="yas3">
+    <p>Təhsil səviyyəsini seçin:</p>
+    <input type="radio" id="orta" name="tehsil"> Orta məktəb
+    <input type="radio" id="bakalavr" name="tehsil"> Bakalavr
+    <input type="radio" id="magistr" name="tehsil"> Magistr
+    <input type="radio" id="doktorantura" name="tehsil"> Doktorantura
+    <p>İcarə növünü seçin:</p>
+    <input type="radio" id="ev" name="icare"> Ev
+    <input type="radio" id="ofis" name="icare"> Ofis
+    <input type="radio" id="avtomobil" name="icare"> Avtomobil
+    <p>İcarənin təklif olunduğu bölgə:</p>
+    <input type="radio" id="seher" name="bolge"> Şəhər mərkəzi
+    <input type="radio" id="kenar" name="bolge"> Kənar bölgə
+    <p>Əlavə əşyalar tələb olunurmu? <input type="checkbox" id="elave"> (Mebel, Kondisioner, Paltaryuyan)</p>
+    <button onclick="checkRent()">Yoxla</button>
+    <p id="res3"></p>
+
+
+
+    <script>
+        function check() {
+            const yas = document.getElementById('yas')
+            const bilet_vip = document.getElementById('bilet_vip')
+            const bilet_standart = document.getElementById('bilet_standart')
+            const bilet_var = document.getElementById('bilet_var')
+            const vesiqe_var = document.getElementById('vesiqe_var')
+            const res = document.getElementById('res')
+            
+            res.innerHTML = yas.value < 18 ? "Yaşınız 18-dən azdır. Giriş qadağandır!" : 
+                !bilet_vip.checked && !bilet_standart.checked ? "Bilet növü seçilməyib!" :
+                !bilet_var.checked && !vesiqe_var.checked ? "Biletiniz və ya şəxsiyyət vəsiqəniz olmalıdır!" :
+                bilet_vip.checked ? "Təbriklər! VIP zonaya daxil ola bilərsiniz." :
+                "Təbriklər! Standart zonaya daxil ola bilərsiniz."
+        }
+
+        function checkCar() {
+            const yas2 = document.getElementById('yas2')
+            const suruculuk = document.getElementById('suruculuk')
+            const luks = document.getElementById('luks')
+            const depozit = document.getElementById('depozit')
+            const res2 = document.getElementById('res2')
+
+            res2.innerHTML = yas2.value < 18 ? "Yaşınız 18-dən kiçikdir, avtomobil kiraye verilməyəcək." :
+                !suruculuk.checked ? "Sürücülük vəsiqəniz tələb olunur." :
+                luks.checked && depozit.checked ? "Lüks avtomobil kiraye verilir, depozit alındı." :
+                luks.checked && !depozit.checked ? "Lüks avtomobil kiraye verilir, ancaq depozit tələb olunur." :
+                !depozit.checked ? "Əgər depozit ödəməsəniz, adi avtomobil kiraye veriləcək." :
+                "Adi avtomobil kiraye verilir, depozit alındı."
+        }
+        function checkRent() {
+            const yas3 = document.getElementById('yas3')
+            const orta = document.getElementById('orta')
+            const bakalavr = document.getElementById('bakalavr')
+            const magistr = document.getElementById('magistr')
+            const doktorantura = document.getElementById('doktorantura')
+            const ev = document.getElementById('ev')
+            const ofis = document.getElementById('ofis')
+            const avtomobil = document.getElementById('avtomobil')
+            const seher = document.getElementById('seher')
+            const kenar = document.getElementById('kenar')
+            const elave = document.getElementById('elave')
+            const res3 = document.getElementById('res3')
+
+            const icareNovu = ofis.checked ? "Ofis" : ev.checked ? "Ev" : avtomobil.checked ? "Avtomobil" : ""
+            const tehsil = orta.checked ? "Orta" : bakalavr.checked ? "Bakalavr" : magistr.checked ? "Magistr" : doktorantura.checked ? "Doktorantura" : ""
+            const elaveText = elave.checked ? " Əlavə əşyalar tələb olunur: Mebel, Kondisioner, Paltaryuyan." : ""
+
+            res3.innerHTML = yas3.value < 18 ? "Yaşınız 18-dən kiçikdir, yalnız şəhər mərkəzindəki icarələr təklif olunur." :
+                !orta.checked && !bakalavr.checked && !magistr.checked && !doktorantura.checked ? "Təhsil səviyyəsi seçilməyib!" :
+                !ev.checked && !ofis.checked && !avtomobil.checked ? "İcarə növü seçilməyib!" :
+                !seher.checked && !kenar.checked ? "Bölgə seçilməyib!" :
+                icareNovu + " icarəsi təklif olunur. Qiymət: " + tehsil + "." + elaveText
+        }
+    </script>
+</body>
+</html>
